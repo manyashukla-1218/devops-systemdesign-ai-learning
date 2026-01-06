@@ -166,5 +166,5 @@ Because you are also learning DevOps, it helps to see how ML is used in operatio
 ## ✅ What I Learned Today
 
 - Machine Learning allows systems to **learn** patterns from real‑world data and use them for predictions and automation.  
-- The three core types of ML—supervised, unsupervised, and reinforcement learning—learn in different ways and power different kinds of applications.[web:22][web:25]  
+- The three core types of ML—supervised, unsupervised, and reinforcement learning—learn in different ways and power different kinds of applications.
 - ML knowledge is valuable not only for AI roles but also for DevOps and operations, because many modern monitoring and automation tools are ML‑powered.
