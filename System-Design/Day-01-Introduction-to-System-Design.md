@@ -41,7 +41,7 @@ All this is possible because of **good system design**, not just good code.
 
 ---
 
-## 🔹 Basic Components of a System
+ ## 🔹 Basic Components of a System
 - Client (Web / Mobile App)
 - Server (Backend)
 - Database
