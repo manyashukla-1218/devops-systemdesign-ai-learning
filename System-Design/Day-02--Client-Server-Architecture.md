@@ -17,7 +17,7 @@ The client is the part of the system that interacts directly with the user.
 - Displays data and UI components to the user.  
 - Handles user interactions like clicks, form submissions, button presses.
 
-Examples of clients:
+ Examples of clients:
 
 - A React web application running in Chrome.  
 - An Android/iOS mobile app.  
