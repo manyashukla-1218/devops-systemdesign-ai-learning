@@ -12,7 +12,7 @@
 
 ---
 
-## 🔹 Reverse Proxy as a Load Balancer
+## 🔹  Reverse Proxy as a Load Balancer
 
 - A **reverse proxy** is a single public endpoint that receives client requests and routes them to internal backend servers. 
 - A load balancer typically acts like a reverse proxy and can:
