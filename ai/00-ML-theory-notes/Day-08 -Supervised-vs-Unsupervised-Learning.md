@@ -2,7 +2,7 @@
 
 ---
 
-## 🔹 What Is Supervised Learning?
+ ## 🔹 What Is Supervised Learning?
 
 - In **supervised learning**, the training data has both **inputs (features)** and **correct outputs (labels)**, so the model learns a mapping from inputs to labels.
 - Typical goal: predict labels for new, unseen inputs as accurately as possible.
