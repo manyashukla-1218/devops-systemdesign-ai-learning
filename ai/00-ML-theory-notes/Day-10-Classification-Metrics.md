@@ -1,4 +1,3 @@
-
 ## 🔹 Confusion Matrix Basics
 
 For binary classification:
@@ -67,5 +66,5 @@ All metrics below are computed from TP, TN, FP, FN.
 
 ## 🔹 AI – Day 10 Takeaways
 
-- Use **accuracy** only when classes are balanced; otherwise look at **precision, recall, and F1**.[web:145][web:148]  
+- Use **accuracy** only when classes are balanced; otherwise look at **precision, recall, and F1**. 
 - Metric choice must match the business goal: spam filters, fraud detection, and medical tasks usually report precision, recall, and F1 instead of accuracy alone.
