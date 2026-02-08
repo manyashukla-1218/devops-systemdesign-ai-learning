@@ -2,7 +2,7 @@
 
 ---
 
-## 🔹 Why Load Balancing?
+ ## 🔹 Why Load Balancing?
 
 - As traffic grows, a single server becomes a bottleneck; a load balancer distributes requests across multiple backend servers to handle more load.  
 - Main goals:
