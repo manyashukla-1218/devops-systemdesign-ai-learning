@@ -19,7 +19,7 @@ Analogy: image = class / blueprint, container = object / running instance.
 
 ---
 
-## 🔹 Basic Docker Workflow (High Level)
+ ## 🔹 Basic Docker Workflow (High Level)
 
 Common lifecycle steps:
 
