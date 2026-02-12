@@ -50,7 +50,7 @@ Common mapping:
 
 ---
 
-## 🔹 Versioning and Pagination (Brief)
+ ## 🔹 Versioning and Pagination (Brief)
 
 - Version APIs using a path (`/v1/...`) or header so changes do not break old clients. 
 - For list endpoints, add pagination parameters (`?page=1&limit=20` or cursor) to keep responses small and performant.
