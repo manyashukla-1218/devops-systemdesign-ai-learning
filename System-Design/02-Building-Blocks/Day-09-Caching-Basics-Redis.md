@@ -7,8 +7,8 @@
 
 ## 🔹 Redis as a Cache
 
-- **Redis** is an in‑memory key‑value store commonly used as a distributed cache in system design. 
-- Key features:
+  - **Redis** is an in‑memory key‑value store commonly used as a distributed cache in system design. 
+  - Key features:
   - Very low‑latency reads/writes from memory.  
   - Key–value data structures (strings, hashes, lists, sets, sorted sets).  
   - Optional **TTL (time‑to‑live)** per key for automatic expiration.
