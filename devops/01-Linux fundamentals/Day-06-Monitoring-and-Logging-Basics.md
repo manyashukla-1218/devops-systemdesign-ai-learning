@@ -11,7 +11,7 @@
 
 ## 🔹 Monitoring – Metrics & Alerts
 
-- **Monitoring** = continuously tracking system health and performance indicators such as CPU, memory, latency, error rates, and throughput. 
+ - **Monitoring** = continuously tracking system health and performance indicators such as CPU, memory, latency, error rates, and throughput. 
 - Key types:
   - **Infrastructure monitoring:** servers, containers, disks, networks.  
   - **Application monitoring (APM):** request latency, error rate, throughput, and external dependency calls.
