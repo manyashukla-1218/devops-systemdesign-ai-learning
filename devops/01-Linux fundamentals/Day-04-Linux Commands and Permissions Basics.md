@@ -4,7 +4,7 @@
 
 ---
 
-## Users, Groups, and Ownership
+ ## Users, Groups, and Ownership
 
 * **Linux as a multi‑user system**
   * Every person or service runs as a specific user account and can belong to one or more groups.
