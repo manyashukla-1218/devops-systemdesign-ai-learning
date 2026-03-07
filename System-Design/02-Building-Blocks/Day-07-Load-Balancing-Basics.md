@@ -9,7 +9,7 @@
   - Improve performance and throughput.  
   - Reduce the impact of a single‑server failure.  
   - Make capacity increases as simple as adding more backend instances.
-
+  
 ---
 
 ## 🔹  Reverse Proxy as a Load Balancer
