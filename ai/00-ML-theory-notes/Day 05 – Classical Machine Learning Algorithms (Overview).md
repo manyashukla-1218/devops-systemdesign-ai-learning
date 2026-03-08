@@ -1,4 +1,4 @@
-## 🔹 Why Learn Classical ML Algorithms?
+ ## 🔹 Why Learn Classical ML Algorithms?
 
 * Deep learning bahut popular hai, lekin classical ML algorithms (regression, classification, clustering) abhi bhi production systems me heavily use hote hain.
 * Interviews me high‑level idea: “kab kaun sa algorithm choose karna hai” expected hota hai, isliye intuition clear hona zaroori hai.
