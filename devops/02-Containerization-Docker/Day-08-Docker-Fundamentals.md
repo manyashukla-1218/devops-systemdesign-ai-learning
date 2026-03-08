@@ -1,4 +1,4 @@
-## 🔹 Why Containers and Docker?
+ ## 🔹 Why Containers and Docker?
 
 - Traditional deployments depend on OS packages and manual setup; “works on my machine” issues are common. 
 - **Docker** packages an application with its dependencies into a **container**, so it behaves the same across laptops, servers, and clouds.
