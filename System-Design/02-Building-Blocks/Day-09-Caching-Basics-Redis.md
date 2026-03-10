@@ -1,4 +1,4 @@
-## 🔹 Why Caching?
+ ## 🔹 Why Caching?
 
 - A **cache** stores frequently accessed data in a faster storage layer (usually in‑memory) to reduce latency and load on databases or downstream services.
 - Benefits: lower response times, fewer expensive DB queries, and better scalability under high read traffic.
