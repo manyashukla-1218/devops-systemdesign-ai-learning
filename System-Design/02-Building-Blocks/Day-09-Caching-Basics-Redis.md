@@ -5,7 +5,7 @@
 
 ---
 
-## 🔹 Redis as a Cache
+ ## 🔹 Redis as a Cache
 
   - **Redis** is an in‑memory key‑value store commonly used as a distributed cache in system design. 
   - Key features:
