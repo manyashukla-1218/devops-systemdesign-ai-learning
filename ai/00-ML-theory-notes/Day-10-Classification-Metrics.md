@@ -1,5 +1,5 @@
  ## 🔹 Confusion Matrix Basics
-
+  
 For binary classification:
 
 - **TP (True Positive):** model predicts positive and it is actually positive.  
