@@ -1,4 +1,4 @@
-## 🔹 What Is Overfitting?
+ ## 🔹 What Is Overfitting?
 
 - A model **overfits** when it learns noise and random fluctuations in the training data instead of the underlying pattern.
 - Symptoms:
