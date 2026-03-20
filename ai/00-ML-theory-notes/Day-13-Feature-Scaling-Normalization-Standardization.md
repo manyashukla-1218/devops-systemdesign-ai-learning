@@ -1,4 +1,4 @@
-## 🔹 Why Feature Scaling?
+ ## 🔹 Why Feature Scaling?
 
 - Many ML algorithms are sensitive to the **scale** of features; large‑magnitude features can dominate distance or gradient calculations. 
 - Scaling helps:
