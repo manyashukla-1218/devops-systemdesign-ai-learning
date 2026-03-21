@@ -1,4 +1,4 @@
-## 🔹 What is Machine Learning?
+ ## 🔹 What is Machine Learning?
 
 Machine Learning (ML) is a field of **artificial** intelligence where systems learn patterns from data and make predictions or decisions without being explicitly programmed for every rule.[web:20][web:24]  
 ML models improve their performance over time as they see more data and feedback.
