@@ -1,4 +1,4 @@
-## 🔹 Why Do We Split the Data?
+ ## 🔹 Why Do We Split the Data?
 
 - A model can memorize the training data; to check real performance, we must test it on **unseen data**. 
 - Splitting data into **train, validation, and test** sets helps with:
