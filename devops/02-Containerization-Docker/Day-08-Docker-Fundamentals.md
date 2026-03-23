@@ -5,7 +5,7 @@
 
 ---
 
-## 🔹 Images vs Containers
+ ## 🔹 Images vs Containers
 
 - **Docker Image**
   - A **read‑only blueprint** that contains the app code, runtime, libraries, and OS dependencies.
