@@ -12,7 +12,7 @@
 
 ---
 
-## 🔹 Components of Latency
+ ## 🔹 Components of Latency
 
 - **Network latency:** time to send data from client to server and back (round‑trip time).  
 - **Processing time:** CPU time to run business logic, database queries, and serialization.  
