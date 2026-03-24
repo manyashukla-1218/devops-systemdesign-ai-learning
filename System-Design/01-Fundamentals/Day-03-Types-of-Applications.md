@@ -6,7 +6,7 @@ The same pattern will not work equally well for a small CRUD app and a global re
 ---
 
 ## 🔹 Monolithic Applications
-
+ 
 A monolithic application bundles UI, business logic, and data access into a single deployable unit (for example, one large backend service). 
 
 **Characteristics**
