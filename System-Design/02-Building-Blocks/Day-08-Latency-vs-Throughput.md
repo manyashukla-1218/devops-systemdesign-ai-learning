@@ -8,7 +8,7 @@
   - The **amount of work** done per unit time, usually measured as requests per second, messages per second, or MB/s.  
   - Reflects how much load the system can handle overall.
 
- In short: **latency = speed per request**, **throughput = total capacity**.
+  In short: **latency = speed per request**, **throughput = total capacity**.
 
 ---
 
