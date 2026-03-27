@@ -1,4 +1,4 @@
-  ## 🔹 Why “Types of Applications” Matter
+ ## 🔹 Why “Types of Applications” Matter
 
 Before designing systems, it is important to understand what *kind* of application you are designing because scalability, consistency, and complexity depend on it. 
 The same pattern will not work equally well for a small CRUD app and a global real‑time messaging platform.
