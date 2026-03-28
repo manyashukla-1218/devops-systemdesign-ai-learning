@@ -1,4 +1,4 @@
- ## 🔹 What is Client-Server Architecture?
+  ## 🔹 What is Client-Server Architecture?
 
  Client‑server architecture is a design pattern where an application is split into two main parts: **client** and server.  
 The client sends requests, and the server processes these requests and returns responses.
