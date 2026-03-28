@@ -1,4 +1,4 @@
-# Day 07 – Load Balancing Basics
+ # Day 07 – Load Balancing Basics
 
 ---
 
