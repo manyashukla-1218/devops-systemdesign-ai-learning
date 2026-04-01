@@ -1,4 +1,4 @@
- ## 🔹 What Is a REST API?
+## 🔹 What Is a REST API?
 
 - A **REST API** exposes server resources over HTTP using a set of endpoints (URIs) and standard methods like GET, POST, PUT, DELETE.
 - Core REST ideas: client–server separation, stateless requests, cacheability, layered architecture.
