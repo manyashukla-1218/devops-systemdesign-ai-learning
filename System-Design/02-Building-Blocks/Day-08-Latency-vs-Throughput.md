@@ -1,4 +1,4 @@
- ## 🔹 Definitions
+  ## 🔹 Definitions
 
 - **Latency**  
   - The **time taken** for a single request to travel through the system and get a response (end‑to‑end delay).
