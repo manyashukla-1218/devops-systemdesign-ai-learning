@@ -6,7 +6,6 @@ In distributed systems, APIs connect clients, backend services, databases, and t
 APIs hide internal implementation details and expose only necessary operations, which improves modularity and security.  
 
 ---
-
 ## 🔹 HTTP as the Transport Layer
 
 Most web APIs use HTTP or HTTPS as the underlying protocol.
