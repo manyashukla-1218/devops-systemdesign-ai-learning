@@ -1,4 +1,4 @@
-  ## 🔹 Confusion Matrix Basics
+ ## 🔹 Confusion Matrix Basics
   
 For binary classification:
 
