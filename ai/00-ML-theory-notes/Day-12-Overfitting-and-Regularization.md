@@ -38,7 +38,7 @@ where \(\lambda\) controls the strength of regularization (bigger \(\lambda\) = 
 
 ---
 
-## 🔹 L1 Regularization (Lasso)
+ ## 🔹 L1 Regularization (Lasso)
 
 - Adds the **sum of absolute weights** to the loss:
 
