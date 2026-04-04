@@ -1,4 +1,4 @@
- ## 🔹 Why Study AI Applications?
+## 🔹 Why Study AI Applications?
 
  Artificial Intelligence is not just theory; it already powers many products and services we use every day.
 Understanding concrete applications helps you connect AI/ML/DL concepts to real business value and makes your interview answers more convincing.
