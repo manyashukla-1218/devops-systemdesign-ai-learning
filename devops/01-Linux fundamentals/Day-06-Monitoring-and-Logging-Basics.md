@@ -9,7 +9,7 @@
 
 ---
 
-## 🔹 Monitoring – Metrics & Alerts
+ ## 🔹 Monitoring – Metrics & Alerts
 
  - **Monitoring** = continuously tracking system health and performance indicators such as CPU, memory, latency, error rates, and throughput. 
 - Key types:
