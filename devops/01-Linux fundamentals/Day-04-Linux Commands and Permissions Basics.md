@@ -3,7 +3,6 @@
   * Correct users, groups, and permissions decide who can deploy, read logs, edit configs, or restart services; wrong settings frequently cause “Permission denied” errors in CI/CD pipelines.
 
 ---
-
  ## Users, Groups, and Ownership
 
 * **Linux as a multi‑user system**
