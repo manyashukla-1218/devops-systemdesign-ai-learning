@@ -1,4 +1,4 @@
- ## 🔹 What Is Overfitting?
+## 🔹 What Is Overfitting?
 
 - A model **overfits** when it learns noise and random fluctuations in the training data instead of the underlying pattern.
 - Symptoms:
@@ -6,7 +6,6 @@
   - Model is too complex for the amount of data available.
 
 ---
-
 ## 🔹 Idea of Regularization
 
 - **Regularization** adds a **penalty term** to the loss function to discourage large parameter values and overly complex models.
