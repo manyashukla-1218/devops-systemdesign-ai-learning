@@ -28,7 +28,6 @@
 - Important point: Network ke sare weights randomly start hote hain; training ke baad hi meaningful representations ban paate hain.
 
 ---
-
 ## 🔹 Training: Loss, Backpropagation, Optimizer
 
 - **Loss function:** measure karta hai prediction ki quality (for example, cross‑entropy for classification, MSE for regression).
