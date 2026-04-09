@@ -1,4 +1,4 @@
- ## 🔹 Bias and Variance – Intuition
+## 🔹 Bias and Variance – Intuition
 
 - **Bias** measures how far the model’s average predictions are from the true function; high bias models are too simple and tend to **underfit**.  
 - **Variance** measures how much the model’s predictions change when the training data changes; high variance models are too complex and tend to **overfit**.
