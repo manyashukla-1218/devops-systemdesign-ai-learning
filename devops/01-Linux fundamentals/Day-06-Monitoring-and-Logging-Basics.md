@@ -1,4 +1,4 @@
- # Day 07 – Monitoring and Logging Basics
+# Day 07 – Monitoring and Logging Basics
 
 ---
 
