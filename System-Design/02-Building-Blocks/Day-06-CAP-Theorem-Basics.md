@@ -1,4 +1,4 @@
- ## 🔹 Why CAP Theorem Matters
+## 🔹 Why CAP Theorem Matters
 
 * Modern systems often run as distributed clusters across multiple nodes and networks, where partitions and failures are normal.
 * CAP theorem explains the fundamental trade‑off between **Consistency (C)**, **Availability (A)**, and **Partition Tolerance (P)** in distributed data stores and  frequently comes up in system design interviews.
