@@ -1,4 +1,4 @@
- ## 🔹 What is an API in System Design?
+## 🔹 What is an API in System Design?
 
 An API (Application Programming Interface) defines how two software components communicate through well-structured requests and responses. 
 In distributed systems, APIs connect clients, backend services, databases, and third‑party systems, making them the backbone of modern architectures.
