@@ -1,4 +1,4 @@
- # DevOps, System Design & AI Learning Journey 🚀
+# DevOps, System Design & AI Learning Journey 🚀
  
 Hi, I’m Manya 👋  
 This repository documents my **daily learning journey** in DevOps, System Design, Cloud, and AI.
