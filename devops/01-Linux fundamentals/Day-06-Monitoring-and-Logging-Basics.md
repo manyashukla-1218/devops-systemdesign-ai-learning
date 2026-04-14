@@ -24,7 +24,7 @@
 
 ---
 
-## 🔹 Logging – Events & Context
+ ## 🔹 Logging – Events & Context
 
 - **Logs** are text records that describe events such as requests, errors, state changes, and background jobs.
 - Important concepts:
