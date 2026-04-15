@@ -1,4 +1,4 @@
- ## 🔹 Why Neural Networks?
+## 🔹 Why Neural Networks?
 
 - Neural networks deep learning ka core building block hain, jo images, text, speech jaise complex data ko handle kar sakte hain.  
 - Interviews me high‑level understanding (layers, weights, activation functions, training loop) expect ki jaati hai, chahe detailed math na bhi aata ho.
