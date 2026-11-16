@@ -1,478 +1,218 @@
-\# Distributed API Rate Limiter
+﻿# Distributed API Rate Limiter
 
+<p align="center">
+  <strong>System Design Case Study</strong><br>
+  Designing a scalable API rate limiter using the Token Bucket algorithm and Redis.
+</p>
 
+---
 
-\## 1. Overview
+## 1. Overview
 
+A rate limiter controls how frequently a client can access an API within a defined time period.
 
+In a distributed application, multiple API servers may receive requests from the same client. A centralized rate-limiting mechanism is needed to ensure that request limits are consistently enforced across all servers.
 
-A Distributed API Rate Limiter controls how many requests a client can send to an API within a specific time period.
+This case study explores a Token Bucket-based design using Redis for shared state.
 
+## 2. Problem
 
-
-It protects backend services from excessive traffic, accidental request bursts, and potential abuse.
-
-
-
-This case study explores how to design a rate limiter that works across multiple application servers using Redis as shared storage.
-
-
-
-\## 2. Problem Statement
-
-
-
-Imagine an application where thousands of users send API requests simultaneously.
-
-
+Consider an application receiving thousands of API requests every second.
 
 Without rate limiting:
 
-\- A single user could send too many requests.
+- A client can generate excessive traffic.
+- Backend services can become overloaded.
+- Infrastructure costs can increase.
+- Legitimate users may experience degraded performance.
 
-\- Backend services could become overloaded.
+**Goal:** Protect backend services while allowing legitimate traffic to continue.
 
-\- Application latency could increase.
+## 3. Requirements
 
-\- Service availability could be affected.
+### Functional
 
+- Identify clients using API keys or user IDs.
+- Configure limits for individual clients.
+- Allow requests within the configured limit.
+- Reject requests that exceed the limit.
+- Return HTTP 429 with retry information.
 
+### Non-functional
 
-We need a system that controls incoming requests while allowing legitimate traffic.
+- Low request-processing latency.
+- Horizontal scalability.
+- Consistent decisions across application servers.
+- Atomic updates to shared state.
+- Resilience to infrastructure failures.
 
-
-
-\## 3. Requirements
-
-
-
-\### Functional Requirements
-
-
-
-\- Identify clients using an API key or user ID.
-
-\- Define request limits for each client.
-
-\- Allow requests within the configured limit.
-
-\- Reject requests that exceed the limit.
-
-\- Return HTTP 429 when the limit is exceeded.
-
-\- Provide retry information to clients.
-
-
-
-\### Non-Functional Requirements
-
-
-
-\- Low request-processing latency.
-
-\- High availability.
-
-\- Horizontal scalability.
-
-\- Consistent rate-limit decisions across application servers.
-
-\- Atomic updates to shared rate-limit state.
-
-
-
-\## 4. High-Level Architecture
-
-
+## 4. Architecture
 
 ```mermaid
-
 flowchart TD
-
-&#x20;   A\["Client"] --> B\["API Gateway"]
-
-&#x20;   B --> C\["Authentication"]
-
-&#x20;   C --> D\["Rate Limiter"]
-
-&#x20;   D --> E{"Request Allowed?"}
-
-&#x20;   E -->|Yes| F\["Backend Service"]
-
-&#x20;   E -->|No| G\["HTTP 429 Response"]
-
-&#x20;   D <--> H\["Redis Shared State"]
-
-&#x20;   F --> I\["Database"]
-
-&#x20;   F --> J\["API Response"]
-
-&#x20;   G --> K\["Retry-After Header"]
-
-&#x20;   K --> A
-
-&#x20;   J --> A
-
+    A["Client"] --> B["Load Balancer / API Gateway"]
+    B --> C["Authentication"]
+    C --> D["Rate Limiter"]
+    D <--> E[("Redis Shared State")]
+    D --> F{"Tokens Available?"}
+    F -->|Yes| G["Backend Service"]
+    F -->|No| H["HTTP 429 Too Many Requests"]
+    G --> I[("Application Database")]
+    G --> J["API Response"]
+    H --> K["Retry-After Header"]
+    J --> A
+    K --> A
 ```
 
-
-
-\### Component Responsibilities
-
-
+### Component Responsibilities
 
 | Component | Responsibility |
-
 |---|---|
-
 | Client | Sends API requests |
-
 | API Gateway | Receives and routes requests |
-
 | Authentication | Identifies the client |
-
-| Rate Limiter | Checks request limits |
-
-| Redis | Stores shared rate-limit state |
-
-| Backend Service | Processes allowed requests |
-
+| Rate Limiter | Applies rate-limit rules |
+| Redis | Maintains shared token state |
+| Backend Service | Processes accepted requests |
 | Database | Stores application data |
 
+## 5. Request Lifecycle
 
+1. Client sends an API request.
+2. API Gateway receives the request.
+3. Authentication identifies the client.
+4. Rate Limiter retrieves the client's bucket state.
+5. Redis performs the shared-state update atomically.
+6. If a token is available, one token is consumed and the request proceeds.
+7. Otherwise, the request is rejected with HTTP 429.
 
-\## 5. Request Flow
+## 6. Algorithm Selection
 
+| Algorithm | Advantages | Limitations |
+|---|---|---|
+| Fixed Window | Simple and efficient | Boundary traffic bursts |
+| Sliding Window Log | Accurate request tracking | Higher memory usage |
+| Token Bucket | Supports controlled bursts | Requires token-state management |
 
+### Selected: Token Bucket
 
-1\. A client sends an API request.
+The bucket stores a limited number of tokens.
 
-2\. The API Gateway receives the request.
+- Tokens are replenished at a configured rate.
+- Each accepted request consumes one token.
+- Requests are rejected when no tokens remain.
+- The bucket cannot exceed its maximum capacity.
 
-3\. Authentication identifies the client.
+## 7. Example Configuration
 
-4\. The Rate Limiter checks the client's current request allowance.
-
-5\. Redis provides the shared state required for the decision.
-
-6\. If the request is allowed, it reaches the backend service.
-
-7\. If the limit is exceeded, the system returns HTTP 429 Too Many Requests.
-
-
-
-\## 6. Rate Limiting Algorithms
-
-
-
-\### Fixed Window Counter
-
-
-
-Counts requests within fixed time intervals.
-
-
-
-Example: Allow 100 requests per minute.
-
-
-
-\*\*Advantage:\*\* Simple to implement.
-
-
-
-\*\*Limitation:\*\* Requests near window boundaries can create traffic bursts.
-
-
-
-\### Sliding Window Log
-
-
-
-Stores timestamps of individual requests and removes expired entries.
-
-
-
-\*\*Advantage:\*\* Accurate request counting.
-
-
-
-\*\*Limitation:\*\* Requires more memory.
-
-
-
-\### Token Bucket
-
-
-
-The bucket contains tokens. Each incoming request consumes one token.
-
-
-
-\- Tokens are added at a configured refill rate.
-
-\- Requests are allowed when tokens are available.
-
-\- Requests are rejected when the bucket is empty.
-
-\- The bucket has a maximum capacity.
-
-
-
-\*\*Advantage:\*\* Supports controlled traffic bursts while maintaining an average request rate.
-
-
-
-\*\*Selected Algorithm:\*\* Token Bucket.
-
-
-
-\## 7. Example Configuration
-
-
-
-Assume a client has the following rate limit:
-
-
-
-| Setting | Value |
-
+| Parameter | Value |
 |---|---:|
-
 | Bucket capacity | 10 tokens |
-
 | Refill rate | 2 tokens/second |
+| Request cost | 1 token |
 
-| Cost per request | 1 token |
+A newly initialized bucket can accept 10 requests immediately. Afterward, tokens become available at a rate of 2 per second.
 
+## 8. Redis Data Model
 
-
-If the bucket contains 10 tokens, the client can initially send 10 requests.
-
-
-
-After that, tokens refill at 2 tokens per second.
-
-
-
-\## 8. Redis Data Model
-
-
-
-A Redis key can represent the rate-limit state of a client.
-
-
-
-Example:
-
-
+A unique key can represent each client's rate-limit state.
 
 ```text
-
-rate\_limit:user\_123
-
+rate_limit:user_123
 ```
 
-
-
-Stored state:
-
-
+Example state:
 
 ```text
-
 tokens = 7
-
-last\_refill\_timestamp = 1730000000
-
+last_refill_timestamp = 1730000000
 ```
 
+All application servers access the same logical state for a client.
 
+**Concurrency requirement:** Token calculation, validation, and consumption must be atomic. Redis Lua scripting can execute these operations atomically.
 
-In a distributed system, multiple application servers use the same Redis state.
+## 9. API Response
 
-
-
-The token update and request decision must be atomic to prevent concurrent requests from incorrectly exceeding the limit.
-
-
-
-Redis Lua scripts can perform these operations atomically.
-
-
-
-\## 9. API Behaviour
-
-
-
-\### Allowed Request
-
-
+### Accepted request
 
 ```http
-
 HTTP/1.1 200 OK
-
 ```
 
-
-
-\### Rate-Limited Request
-
-
+### Rejected request
 
 ```http
-
 HTTP/1.1 429 Too Many Requests
-
 Retry-After: 2
-
 Content-Type: application/json
-
 ```
-
-
-
-Example response:
-
-
 
 ```json
-
 {
-
-&#x20; "error": "rate\_limit\_exceeded",
-
-&#x20; "message": "Too many requests. Please try again later."
-
+  "error": "rate_limit_exceeded",
+  "message": "Too many requests. Please try again later."
 }
-
 ```
 
+## 10. Distributed System Challenges
 
+### Shared State
 
-\## 10. Distributed System Considerations
+Local counters on individual servers can produce inconsistent decisions. Redis provides shared state across application instances.
 
+### Atomicity
 
+Concurrent requests must not consume the same token. Redis Lua scripts can make the token-bucket operation atomic.
 
-\### Shared State
+### Redis Availability
 
+Two possible failure policies:
 
+- **Fail-open:** Allow requests if Redis is unavailable.
+- **Fail-closed:** Reject requests if Redis is unavailable.
 
-If every application server maintains its own counter, clients may receive inconsistent rate-limit decisions.
+The correct choice depends on the application's security and availability requirements.
 
+### Horizontal Scaling
 
+Additional application servers can be introduced as traffic increases. They continue using the shared Redis state.
 
-Redis provides shared state across application servers.
+## 11. Trade-offs
 
+- Redis adds network latency to request processing.
+- Redis availability affects rate-limit enforcement.
+- Redis replication and failover need careful planning.
+- A heavily used Redis deployment may become a bottleneck.
+- Rate-limit policies must balance abuse prevention and user experience.
 
+## 12. Implementation
 
-\### Atomicity
+| File | Purpose |
+|---|---|
+| `implementation/cpp/rate_limiter.cpp` | In-memory Token Bucket learning implementation |
+| `implementation/redis/token_bucket.lua` | Atomic Redis Token Bucket operation |
 
+The C++ implementation demonstrates the algorithm within a single process. It is not a distributed production implementation.
 
+The Redis Lua implementation demonstrates how shared state can be updated atomically.
 
-Concurrent requests can attempt to consume tokens simultaneously.
+## 13. Future Improvements
 
+- Per-user and per-endpoint rate limits.
+- Subscription-based rate-limit policies.
+- Monitoring and metrics.
+- Redis Cluster and failover support.
+- Concurrent request and load testing.
+- Automated integration tests.
 
+## 14. References
 
-Redis Lua scripts help ensure that checking and updating the token bucket happen as one atomic operation.
+- [Redis Documentation](https://redis.io/docs/latest/)
+- [Redis Lua Scripting](https://redis.io/docs/latest/develop/programmability/eval-intro/)
+- [HTTP 429 - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429)
+- [System Design Primer](https://github.com/donnemartin/system-design-primer)
 
+---
 
-
-\### Redis Failure
-
-
-
-The system needs a defined failure policy:
-
-
-
-\- \*\*Fail-open:\*\* Allow requests when Redis is unavailable.
-
-\- \*\*Fail-closed:\*\* Reject requests when Redis is unavailable.
-
-
-
-The appropriate policy depends on business and security requirements.
-
-
-
-\### Horizontal Scalability
-
-
-
-More API Gateway and application instances can be added as traffic grows. They continue using shared rate-limit state.
-
-
-
-\## 11. Trade-offs and Limitations
-
-
-
-\- Redis introduces an additional network dependency.
-
-\- Every rate-limit check adds processing overhead.
-
-\- Redis availability becomes important for consistent decisions.
-
-\- Distributed deployments must consider Redis replication, failover, and key expiration.
-
-\- A single global Redis instance may become a bottleneck at high traffic volumes.
-
-
-
-\## 12. Implementation
-
-
-
-This case study contains two learning implementations:
-
-
-
-\- \*\*C++:\*\* An in-memory Token Bucket implementation for understanding the algorithm and concurrency within a single process.
-
-\- \*\*Redis Lua:\*\* An atomic Token Bucket operation for shared distributed state.
-
-
-
-The C++ implementation is not itself a distributed production system. The Redis implementation demonstrates the shared-state approach.
-
-
-
-\## 13. Possible Improvements
-
-
-
-\- Add per-user and per-API rate limits.
-
-\- Support different subscription tiers.
-
-\- Add monitoring and rate-limit metrics.
-
-\- Introduce Redis Cluster for larger workloads.
-
-\- Add automated concurrency and load tests.
-
-\- Evaluate alternative algorithms for different traffic patterns.
-
-
-
-\## 14. Learning Resources
-
-
-
-\- \[Redis Documentation](https://redis.io/docs/latest/)
-
-\- \[Redis Lua Scripting](https://redis.io/docs/latest/develop/programmability/eval-intro/)
-
-\- \[HTTP 429 - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429)
-
-\- \[System Design Primer](https://github.com/donnemartin/system-design-primer)
-
-
-
-\---
-
-
-
-\*\*Project Goal:\*\* Understand how API rate limiting works, why shared state matters in distributed systems, and how Redis can support atomic rate-limit decisions.
-
+*This case study is an independent educational system design, not a description of any company's private implementation.*
